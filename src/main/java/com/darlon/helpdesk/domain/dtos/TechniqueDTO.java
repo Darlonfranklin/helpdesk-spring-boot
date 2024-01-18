@@ -26,6 +26,7 @@ public class TechniqueDTO implements Serializable {
 
 	public TechniqueDTO() {
 		super();
+		addProfiles(Profile.CLIENT);
 	}
 
 	public TechniqueDTO(Technique obj) {
