@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.darlon.helpdesk.domain.Technique;
 import com.darlon.helpdesk.repositories.TechniqueRepository;
+import com.darlon.helpdesk.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class TechniqueService {
@@ -16,7 +17,7 @@ public class TechniqueService {
 
 	public Technique findById(Integer id) {
 		Optional<Technique> obj = repository.findById(id);
-		return obj.orElse(null);
+		return obj.orElseThrow(() -> new ObjectNotFoundException("Object Not Found! " + id));
 	}
 
 }
