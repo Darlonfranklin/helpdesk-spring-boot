@@ -38,6 +38,7 @@ public class TechniqueDTO implements Serializable {
 		this.password = obj.getPassword();
 		this.profiles = obj.getProfiles().stream().map(x -> x.getCode()).collect(Collectors.toSet());
 		this.creationDate = obj.getCreationDate();
+		addProfiles(Profile.CLIENT);
 	}
 
 	public Integer getId() {
