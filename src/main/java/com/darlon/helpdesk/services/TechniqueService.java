@@ -14,6 +14,8 @@ import com.darlon.helpdesk.repositories.TechniqueRepository;
 import com.darlon.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.darlon.helpdesk.services.exceptions.ObjectNotFoundException;
 
+import jakarta.validation.Valid;
+
 @Service
 public class TechniqueService {
 
@@ -37,6 +39,15 @@ public class TechniqueService {
 		validForCpfAndEmail(objDTO);
 		Technique newObj = new Technique(objDTO);
 		return repository.save(newObj);
+	}
+
+	public Technique update(Integer id, @Valid TechniqueDTO objDTO) {
+		objDTO.setId(id);
+		Technique oldObj = findById(id);
+		validForCpfAndEmail(objDTO);
+		oldObj = new Technique(objDTO);
+		return repository.save(oldObj);
+
 	}
 
 	private void validForCpfAndEmail(TechniqueDTO objDTO) {

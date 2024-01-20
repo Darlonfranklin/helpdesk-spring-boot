@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 import com.darlon.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -23,23 +22,23 @@ import jakarta.persistence.Id;
 public abstract class Person implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Integer id;
 	protected String name;
-	
+
 	@Column(unique = true)
 	protected String cpf;
-	
+
 	@Column(unique = true)
 	protected String email;
 	protected String password;
-	
+
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "profiles")
 	protected Set<Integer> profiles = new HashSet<>();
-	
+
 	@JsonFormat(pattern = "dd/MM/yyyy")
 	protected LocalDate creationDate = LocalDate.now();
 
@@ -105,7 +104,7 @@ public abstract class Person implements Serializable {
 	public void addProfile(Profile profile) {
 		this.profiles.add(profile.getCode());
 	}
-	
+
 	public LocalDate getCreationDate() {
 		return creationDate;
 	}
