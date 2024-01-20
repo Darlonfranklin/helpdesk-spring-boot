@@ -1,9 +1,8 @@
 package com.darlon.helpdesk.controllers;
 
-import java.net.URI;
+import java.net.URI; 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.darlon.helpdesk.domain.Technique;
 import com.darlon.helpdesk.domain.dtos.TechniqueDTO;
 import com.darlon.helpdesk.services.TechniqueService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/techniques")
@@ -38,7 +39,7 @@ public class TechniqueController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<TechniqueDTO> create(@RequestBody TechniqueDTO objDTO) {
+	public ResponseEntity<TechniqueDTO> create(@Valid @RequestBody TechniqueDTO objDTO) {
 		Technique newObj = service.create(objDTO);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newObj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
