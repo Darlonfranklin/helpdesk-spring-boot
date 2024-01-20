@@ -50,6 +50,14 @@ public class TechniqueService {
 
 	}
 
+	public void delete(Integer id) {
+		Technique obj = findById(id);
+		if (obj.getCalled().size() > 0) {
+			throw new DataIntegrityViolationException("The technician has work orders and cannot be deleted!");
+		}
+		repository.deleteById(id);
+	}
+
 	private void validForCpfAndEmail(TechniqueDTO objDTO) {
 		Optional<Person> obj = personRepository.findByCpf(objDTO.getCpf());
 		if (obj.isPresent() && obj.get().getId() != objDTO.getId()) {
