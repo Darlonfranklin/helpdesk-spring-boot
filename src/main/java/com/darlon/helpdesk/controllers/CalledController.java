@@ -1,5 +1,8 @@
 package com.darlon.helpdesk.controllers;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,4 +28,10 @@ public class CalledController {
 
 	}
 
+	@GetMapping
+	public ResponseEntity<List<CalledDTO>> findAll() {
+		List<Called> list = service.findAll();
+		List<CalledDTO> listDTO = list.stream().map(obj -> new CalledDTO(obj)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(listDTO);
+	}
 }
