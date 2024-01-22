@@ -1,5 +1,6 @@
 package com.darlon.helpdesk.services;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +43,13 @@ public class CalledService {
 		return repository.save(newCalled(objDTO));
 	}
 
+	public Called update(Integer id, @Valid CalledDTO objDTO) {
+		objDTO.setId(id);
+		Called oldObj = findById(id);
+		oldObj = newCalled(objDTO);
+		return repository.save(oldObj);
+	}
+
 	private Called newCalled(CalledDTO obj) {
 		Technique technique = techniqueService.findById(obj.getTechnique());
 		Client client = clientService.findById(obj.getClient());
@@ -51,6 +59,10 @@ public class CalledService {
 			called.setId(obj.getId());
 		}
 
+		if(obj.getStatus().equals(2)) {
+			called.setClosingDate(LocalDate.now());
+		}
+		
 		called.setTechnique(technique);
 		called.setClient(client);
 		called.setPriority(Priority.toEnum(obj.getPriority()));
