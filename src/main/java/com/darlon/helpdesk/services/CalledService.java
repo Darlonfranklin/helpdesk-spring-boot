@@ -1,8 +1,11 @@
 package com.darlon.helpdesk.services;
 
 import java.time.LocalDate;
+
 import java.util.List;
 import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +18,6 @@ import com.darlon.helpdesk.domain.enums.Priority;
 import com.darlon.helpdesk.domain.enums.Status;
 import com.darlon.helpdesk.repositories.CalledRepository;
 import com.darlon.helpdesk.services.exceptions.ObjectNotFoundException;
-
-import jakarta.validation.Valid;
 
 @Service
 public class CalledService {
@@ -59,10 +60,10 @@ public class CalledService {
 			called.setId(obj.getId());
 		}
 
-		if(obj.getStatus().equals(2)) {
+		if (obj.getStatus().equals(2)) {
 			called.setClosingDate(LocalDate.now());
 		}
-		
+
 		called.setTechnique(technique);
 		called.setClient(client);
 		called.setPriority(Priority.toEnum(obj.getPriority()));

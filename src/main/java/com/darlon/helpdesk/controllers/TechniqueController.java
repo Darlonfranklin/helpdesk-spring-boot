@@ -1,8 +1,11 @@
 package com.darlon.helpdesk.controllers;
 
-import java.net.URI;
+import java.net.URI;  
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,9 +21,9 @@ import com.darlon.helpdesk.domain.Technique;
 import com.darlon.helpdesk.domain.dtos.TechniqueDTO;
 import com.darlon.helpdesk.services.TechniqueService;
 
-import jakarta.validation.Valid;
 
-@RestController
+ 
+@RestController 
 @RequestMapping(value = "/techniques")
 public class TechniqueController {
 

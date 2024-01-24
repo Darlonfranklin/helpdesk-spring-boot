@@ -1,21 +1,21 @@
 package com.darlon.helpdesk.domain;
 
-import java.util.ArrayList;  
+import java.util.ArrayList; 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import com.darlon.helpdesk.domain.dtos.ClientDTO;
 import com.darlon.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-
 @Entity(name = "tb_client")
 public class Client extends Person {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
 	private List<Called> called = new ArrayList<>();
@@ -29,7 +29,7 @@ public class Client extends Person {
 		super(id, name, cpf, email, password);
 		addProfile(Profile.CLIENT);
 	}
-	
+
 	public Client(ClientDTO obj) {
 		super();
 		this.id = obj.getId();
@@ -42,7 +42,7 @@ public class Client extends Person {
 	}
 
 	public List<Called> getCalled() {
-		return called ;
+		return called;
 	}
 
 	public void setCalled(List<Called> called) {

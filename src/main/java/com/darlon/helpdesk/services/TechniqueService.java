@@ -1,9 +1,12 @@
 package com.darlon.helpdesk.services;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.darlon.helpdesk.domain.Person;
@@ -14,8 +17,6 @@ import com.darlon.helpdesk.repositories.TechniqueRepository;
 import com.darlon.helpdesk.services.exceptions.DataIntegrityViolationException;
 import com.darlon.helpdesk.services.exceptions.ObjectNotFoundException;
 
-import jakarta.validation.Valid;
-
 @Service
 public class TechniqueService {
 
@@ -24,6 +25,10 @@ public class TechniqueService {
 
 	@Autowired
 	private PersonRepository personRepository;
+	
+
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 
 	public Technique findById(Integer id) {
 		Optional<Technique> obj = repository.findById(id);
@@ -36,6 +41,7 @@ public class TechniqueService {
 
 	public Technique create(TechniqueDTO objDTO) {
 		objDTO.setId(null);
+		objDTO.setPassword(encoder.encode(objDTO.getPassword()));
 		validForCpfAndEmail(objDTO);
 		Technique newObj = new Technique(objDTO);
 		return repository.save(newObj);

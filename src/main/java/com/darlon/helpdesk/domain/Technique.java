@@ -1,15 +1,15 @@
 package com.darlon.helpdesk.domain;
 
-import java.util.ArrayList;
+import java.util.ArrayList; 
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import com.darlon.helpdesk.domain.dtos.TechniqueDTO;
 import com.darlon.helpdesk.domain.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
 
 @Entity(name = "tb_technique")
 public class Technique extends Person {

@@ -3,10 +3,10 @@ package com.darlon.helpdesk.domain.dtos;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 import com.darlon.helpdesk.domain.Called;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import jakarta.validation.constraints.NotNull;
 
 public class CalledDTO implements Serializable {
 
