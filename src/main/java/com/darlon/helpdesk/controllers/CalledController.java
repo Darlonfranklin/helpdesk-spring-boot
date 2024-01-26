@@ -1,6 +1,6 @@
 package com.darlon.helpdesk.controllers;
 
-import java.net.URI; 
+import java.net.URI;  
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +20,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.darlon.helpdesk.domain.Called;
 import com.darlon.helpdesk.domain.dtos.CalledDTO;
 import com.darlon.helpdesk.services.CalledService;
-
+ 
 
  
 @RestController
